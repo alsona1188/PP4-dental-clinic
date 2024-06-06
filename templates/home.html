@@ -12,13 +12,13 @@
     <h1>Our Services</h1>
     {% for service in services %}
     <h2>{{ service.name }}</h2>
-    <p>{{ service.description }}</p>
+    <p>{{ service.description|safe }}</p>
     <p>{{ service.price }}</p>
     {% endfor %}
 
     <h1>Our Doctors</h1>
     {% for dentist in dentists %}
-    <h2>{{ dentist.last_name }} {{ dentist.first_name }}</h2>
+    <h2>{{ dentist.first_name }} {{ dentist.last_name }}</h2>
     <p>{{ dentist.specialty }}</p>
     
     {% endfor %}
