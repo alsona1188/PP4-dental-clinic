@@ -1,0 +1,125 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html class="h-100" lang="en">
+
+<head>
+    <title>Dental Care Clinic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google Fonts CSS -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body class="d-flex flex-column h-100 main-bg">
+     <!-- Topbar Start -->
+     <div class=" container-fluid bg-light ps-5 pe-0 d-none d-lg-block">
+        <div class="row gx-0">
+            <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center">
+                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Monday - Friday : 9.00 - 18.00 </small>
+                </div>
+            </div>
+            <div class="col-md-6 text-center text-lg-end">
+                <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
+                    <div class="me-3 pe-3 border-end py-2">
+                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i>dentalcare@yahoo.com</p>
+                    </div>
+                    <div class="py-2">
+                        <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+49 345 678912</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+     <!-- Navbar Start -->
+     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+        <a href="#" class="navbar-brand p-0">
+            <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>Dental Care</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="#" class="nav-item nav-link active">Home</a>
+                <a href="#" class="nav-item nav-link">About Us</a>
+                <a href="#" class="nav-item nav-link">Service</a>
+                <a href="#" class="nav-item nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <main class="flex-shrink-0 main-bg">
+
+        {% block content %}
+        <!-- Content Goes here -->
+        {% endblock content %}
+
+    </main>
+
+   <!-- Footer Start -->
+<div class="container-fluid bg-dark text-light py-5 wow fadeInUp" data-wow-delay="0.3s">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6">
+                <h3 class="text-white mb-4">Popular Links</h3>
+                <div class="d-flex flex-column justify-content-start">
+                    <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Home</a>
+                    <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
+                    <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Our Services</a>
+                    <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <h3 class="text-white mb-4">Get In Touch</h3>
+                <p class="mb-2"><i class="bi bi-geo-alt text-primary me-2"></i>Kopenhagener Strasse 3 70173, Stuttgart </p>
+                <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>dentalcare@yahoo.com</p>
+                <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>+49 345 678912</p>
+            </div>
+            <div class="col-lg-4">
+                <h3 class="text-white mb-4 text-center">Follow Us</h3>
+                <div class="d-flex justify-content-center">
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded" href="#"><i class="fab fa-instagram fw-normal"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid text-light py-4" style="background: #051225;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="https://github.com/alsona1188?tab=repositories"target="_blank">Alsona Natsi</a>. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
