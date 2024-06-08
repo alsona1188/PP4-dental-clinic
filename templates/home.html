@@ -57,34 +57,46 @@
 
 
     <!-- Services Section -->
-    <h1 class="text-center mb-4">Our Services</h1>
-    <div class="row">
-        {% for service in services %}
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h2 class="card-title">{{ service.name }}</h2>
-                    <p class="card-text">{{ service.description|safe }}</p>
-                    <p class="card-text font-weight-bold"><i>Price: from {{ service.price }} €</i></p>
-                </div>
+     <br>
+     <br>
+     <h1 class="text-center mb-4">Our Services</h1>
+<div class="row">
+    {% for service in services %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <img src="{{ service.featured_image.url }}" class="card-img-top" alt="{{ service.name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ service.name }}</h5>
+                <p class="card-text">{{ service.description|safe }}</p>
+                <p class="card-text font-weight-bold"><i>Price: from {{ service.price }} €</i></p>
             </div>
         </div>
-        {% endfor %}
     </div>
+    {% endfor %}
+</div>
+
+     
 
     <!-- Doctors Section -->
     <h1 class="text-center my-4">Our Doctors</h1>
-    <div class="row">
-        {% for dentist in dentists %}
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h2 class="card-title">{{ dentist.first_name }} {{ dentist.last_name }}</h2>
-                    <p class="card-text">{{ dentist.specialty }}</p>
+    <div class="col-12 mt-3 left">
+        <div class="row">
+            {% for dentist in dentists %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="image-container">
+                            <img class="card-img-top" src=" {{ dentist.featured_image.url }}" alt="{{ dentist.first_name }} {{ dentist.last_name }}">
+                        </div>
+                            <h2 class="card-title">{{ dentist.first_name }} {{ dentist.last_name }}</h2>
+                            <p class="card-text">{{ dentist.specialty }}</p>
+                    </div>
                 </div>
             </div>
+            {% if forloop.counter|divisibleby:3 %}
         </div>
+        <div class="row">
+            {% endif %}
         {% endfor %}
     </div>
-</div>
 {% endblock content %}
