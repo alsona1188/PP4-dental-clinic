@@ -12,7 +12,7 @@
           <h1>Book an Appointment</h1>
           <form id="appointment_form" method="post" action="{% url 'appointment' %}">
             {% csrf_token %}
-            {{ appointment_form.as_p }}
+            {{ appointment_form | crispy }}
             <button class="btn btn-primary py-md-3 px-md-5 me-3" type="submit">Book Appointment</button>
           </form>
           <br>
