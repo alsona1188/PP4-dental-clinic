@@ -34,7 +34,11 @@
                     <div class="p-3" style="max-width: 900px;">
                         <h5 class="text-white text-uppercase mb-3 ">Optimize Your Dental Health</h5>
                         <h1 class="display-1 text-white mb-md-4 ">Take The Best Quality Dental Treatment</h1>
+                        {% if user.is_authenticated %}
                         <a href="#" class="btn btn-primary py-md-3 px-md-5 me-3">Appointment</a>
+                        {% else %}
+                        <a href="{% url 'account_signup' %}">Register</a>
+                        {% endif %}
                         <a href="" class="btn btn-secondary py-md-3 px-md-5 ">Contact Us</a>
                     </div>
                 </div>
@@ -78,7 +82,7 @@
      
 
     <!-- Doctors Section -->
-    <h1 class="text-center my-4">Our Doctors</h1>
+    <h1 class="text-center my-4">Our Staff</h1>
     <div class="col-12 mt-3 left">
         <div class="row">
             {% for dentist in dentists %}
