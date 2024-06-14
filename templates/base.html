@@ -73,9 +73,14 @@
                 <li class="nav-item">
                     <a href="{% url 'appointment' %}" class="nav-item nav-link active">Make Appointment</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page" href="{% url 'account_logout' %}">Logout</a>
-                </li>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">My Account</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="{% url 'my_appointments:appointment_list' %}" class="dropdown-item">My Appointments</a>
+                        <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+
+                    </div>
+                </div>
                 
                 {% else %}
                 <li class="nav-item">

@@ -5,9 +5,9 @@ from .models import AppointmentRequest
 
 @admin.register(AppointmentRequest)
 class AppointmentRequestAdmin(admin.ModelAdmin):
-    list_display = ('full_name','dentist', 'service', 'date', 'time', 'message', 'read', 'created_at')
-    list_filter = ('full_name','dentist', 'service', 'date')
-    search_fields = ('full_name','dentist__name', 'service__name', 'message')
+    list_display = ('user','dentist', 'service', 'date', 'time', 'message', 'read', 'created_at')
+    list_filter = ('user','dentist', 'service', 'date')
+    search_fields = ('user','dentist__name', 'service__name', 'message')
    
 
 

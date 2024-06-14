@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from datetime import date, time, datetime
 from .models import AppointmentRequest
@@ -35,7 +36,7 @@ class AppointmentForm(forms.ModelForm):
 
     class Meta:
         model = AppointmentRequest
-        fields = ('full_name', 'service', 'dentist', 'date', 'time', 'message')
+        fields = ('service', 'dentist', 'date', 'time', 'message')
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date'}),
         }
