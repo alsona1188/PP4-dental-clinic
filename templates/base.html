@@ -74,7 +74,7 @@
                     <a href="{% url 'appointment' %}" class="nav-item nav-link active">Make Appointment</a>
                 </li>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">My Account</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Hey {{ user }}!</a>
                     <div class="dropdown-menu m-0">
                         <a href="{% url 'my_appointments:appointment_list' %}" class="dropdown-item">My Appointments</a>
                         <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
@@ -96,30 +96,24 @@
     </nav>
     <!-- Navbar End -->
 
-    <!-- displaying Django messages -->
-<div class="container">
-    <div class="row">
-      <div class="col-md-8 offset-md-2">
-        {% for message in messages %}
-        <div class="alert {{ message.tags }} alert-dismissible
-          fade show" id="msg" role="alert">
-          {{ message | safe }}
-          <button type="button" class="btn-close"
-            data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {% endfor %}
-      </div>
+<!-- displaying Django messages -->
+ 
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {{ message | safe }}
     </div>
-  </div>
+  {% endfor %}
+{% endif %}
      
-    <main class="flex-shrink-0 main-bg">
-        
+<main class="flex-shrink-0 main-bg">
 
-        {% block content %}
-        <!-- Content Goes here -->
-        {% endblock content %}
+    {% block content %}
+    <!-- Content Goes here -->
+    {% endblock content %}
 
-    </main>
+</main>
 
    <!-- Footer Start -->
 <div class="container-fluid bg-dark text-light py-5 wow fadeInUp" data-wow-delay="0.3s">
