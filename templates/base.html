@@ -67,7 +67,7 @@
             <div class="navbar-nav ms-auto py-0">
                 <a class="nav-item nav-link active" aria-current="page" href="{% url 'home' %}" >Home</a>
                 <a class="nav-item nav-link" aria-current="page"href="{% url 'about' %}" >About Us</a>
-                <a href="#" class="nav-item nav-link">Service</a>
+                <a href="{% url 'services' %}" class="nav-item nav-link">Service</a>
                 <a href="#" class="nav-item nav-link">Contact</a>
                 {% if user.is_authenticated %}
                 <li class="nav-item">

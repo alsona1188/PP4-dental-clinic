@@ -12,4 +12,11 @@ def home(request):
     # Pass the data to the template
     return render(request, 'home.html', {'services': services, 'dentists': dentists})
 
+def services(request):
+    services = Service.objects.all()
+    return render(request, 'services.html', {'services': services,})
+
+
+
+
    
