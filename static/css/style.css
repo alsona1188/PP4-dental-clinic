@@ -127,28 +127,11 @@ h6,
     height: 3rem;
 }
 
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+.hero-header {
+    background: linear-gradient(rgba(9, 30, 62, .85), rgba(22, 53, 101, 0.85)), url(../img/carousel-2.jpg) center center no-repeat;
+    background-size: cover;
 }
 
-.fade-in.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-.slide-in {
-    opacity: 0;
-    transform: translateX(-20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.slide-in.active {
-    opacity: 1;
-    transform: translateX(0);
-}
 
 
 .box {
