@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from django.views import generic
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from .models import Service, Dentist, ContactFormRequest
 from .forms import ContactForm
 from django.contrib import messages

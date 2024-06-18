@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class AppointmentRequest(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="patient", default=1)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="patient")
     service = models.ForeignKey('clinic.Service', on_delete=models.CASCADE)
     dentist = models.ForeignKey('clinic.Dentist', on_delete=models.CASCADE)
     date = models.DateField()
