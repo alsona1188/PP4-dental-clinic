@@ -23,6 +23,6 @@ class DentistAdmin(SummernoteModelAdmin):
 
 @admin.register(ContactFormRequest)
 class ContactFormRequest(SummernoteModelAdmin):
-    list_display = ['user', 'subject', 'message', 'read']
-    search_fields = ['user', 'subject']
-    list_filter = ('user',)
+    list_display = ['name', 'email', 'subject', 'message', 'read']
+    search_fields = ['name', 'subject']
+    list_filter = ('name',)

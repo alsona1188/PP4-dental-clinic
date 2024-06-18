@@ -69,6 +69,7 @@
                 <a class="nav-item nav-link" aria-current="page"href="{% url 'about' %}" >About Us</a>
                 <a href="{% url 'services' %}" class="nav-item nav-link">Service</a>
                 <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a href="{% url 'appointment' %}" class="nav-item nav-link active">Make Appointment</a>
@@ -128,8 +129,8 @@
                     <a class="text-light mb-2 {% if request.path == about_url %}
                     active{%endif%}" aria-current="page"
                     href="{% url 'about' %}"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
-                    <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Our Services</a>
-                    <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
+                    <a class="text-light mb-2" href="{% url 'services' %}"><i class="bi bi-arrow-right text-primary me-2"></i>Our Services</a>
+                    <a class="text-light" href="{% url 'contact' %}"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
             
             </div>
             <div class="col-lg-4 col-md-6">

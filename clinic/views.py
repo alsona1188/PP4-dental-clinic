@@ -21,7 +21,7 @@ def services(request):
     services = Service.objects.all()
     return render(request, 'services.html', {'services': services,})
 
-@login_required
+
 def contact_view(request):
     """
     Renders the Contact page and handles the contact form submission.
@@ -30,7 +30,6 @@ def contact_view(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             contact_form_request = form.save(commit=False)
-            contact_form_request.user = request.user
             contact_form_request.save()
             messages.add_message(
                 request, messages.SUCCESS,
