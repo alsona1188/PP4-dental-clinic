@@ -29,6 +29,7 @@ class Dentist(models.Model):
 class ContactFormRequest(models.Model):
     # Contact form model for storing the contact forms data.
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="contact_forms")
+    email = models.EmailField(default="Enter your email")
     subject = models.CharField(max_length=200)
     message = models.TextField()
     read = models.BooleanField(default=False)
