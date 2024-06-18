@@ -20,6 +20,7 @@ from clinic import views
 
 
 urlpatterns = [
+    path('contact/', views.contact_view, name='contact'),
     path('services/', views.services, name='services'),
     path('my_appointments/', include('my_appointments.urls')), 
     path("appointment/", include("appointment.urls"), name= "appointment-urls"),

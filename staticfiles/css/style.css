@@ -127,30 +127,6 @@ h6,
     height: 3rem;
 }
 
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.fade-in.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-.slide-in {
-    opacity: 0;
-    transform: translateX(-20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.slide-in.active {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-
 .box {
     background-color: #F57E57;
     border-radius: 10px;

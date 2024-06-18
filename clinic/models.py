@@ -26,3 +26,15 @@ class Dentist(models.Model):
         return f'Dr. {self.first_name} {self.last_name}'
 
 
+class ContactFormRequest(models.Model):
+    # Contact form model for storing the contact forms data.
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="contact_forms")
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+    read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Contact form request by {self.user.username} with subject {self.subject}"
+
+
+
