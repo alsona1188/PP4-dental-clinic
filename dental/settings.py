@@ -112,6 +112,8 @@ DATABASES = {
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
+GOOGLE_MAPS_API_KEY = os.getenv('GOOGLE_MAPS_API_KEY')
+
 CSRF_TRUSTED_ORIGINS = [
     "https://*.codeanyapp.com",
     "https://*.herokuapp.com",

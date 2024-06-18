@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.conf import settings
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from .models import Service, Dentist, ContactFormRequest
@@ -26,7 +27,7 @@ def contact_view(request):
     Renders the Contact page and handles the contact form submission.
     """
     if request.method == "POST":
-        form = ContactFormRequestForm(request.POST)
+        form = ContactForm(request.POST)
         if form.is_valid():
             contact_form_request = form.save(commit=False)
             contact_form_request.user = request.user
@@ -39,10 +40,15 @@ def contact_view(request):
     else:
         form = ContactForm()
 
-    # Assuming you want to pass all contact form requests to the template
     contacts = ContactFormRequest.objects.all()
+    context = {
+        'form': form,
+        'contacts': contacts,
+        'google_maps_api_key': settings.GOOGLE_MAPS_API_KEY,
+    }
 
-    return render(request, 'contact.html', {'form': form, 'contacts': contacts})
+    return render(request, 'contact.html', context)
+
 
 
 
