@@ -1,12 +1,12 @@
 from django.contrib import admin
+from django import forms
 from .models import Service, Dentist, ContactFormRequest
 from django_summernote.admin import SummernoteModelAdmin
 
-# Register your models here.
 
 @admin.register(Service)
 class ServiceAdmin(SummernoteModelAdmin):
-    list_display = ['name', 'price', 'description']
+    list_display = ['name', 'price']
     search_fields = ['name', 'price']
     ordering = ['price'] 
     summernote_fields = ('description',)
@@ -26,3 +26,5 @@ class ContactFormRequest(SummernoteModelAdmin):
     list_display = ['name', 'email', 'subject', 'message', 'read']
     search_fields = ['name', 'subject']
     list_filter = ('name',)
+
+
