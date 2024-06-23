@@ -3,6 +3,7 @@ from clinic.models import Dentist
 
 # Create your models here.
 
+
 class AvailableTimeSlot(models.Model):
     dentist = models.ForeignKey(Dentist, on_delete=models.CASCADE)
     date = models.DateField()

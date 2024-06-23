@@ -4,6 +4,7 @@ from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
+
 class Service(models.Model):
     # Service model for storing services data.
     name = models.CharField(max_length=200, unique=True)
@@ -13,6 +14,7 @@ class Service(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Dentist(models.Model):
     # Dentist model for storing the dentist's data.
@@ -36,6 +38,3 @@ class ContactFormRequest(models.Model):
 
     def __str__(self):
         return f"Contact form request by {self.name} with email {self.email} and subject {self.subject}"
-
-
-

@@ -8,20 +8,21 @@ from .models import AppointmentRequest
 from django.contrib import messages
 
 
-
-
 @login_required
 def appointment_request(request):
     if request.method == "POST":
         appointment_form = AppointmentForm(data=request.POST)
         if appointment_form.is_valid():
             appointment = appointment_form.save(commit=False)
-            appointment.user = request.user  # Assign the current user to the appointment
+            appointment.user = request.user
             appointment.save()
             appointment_form = AppointmentForm()
             messages.success(request, "Thank you for booking with us!")
         else:
-            messages.error(request, "This time slot is not available! Try another one, or you can call us: +49 345 678912")
+            messages.error(request,
+                           "This time slot is not available! "
+                           "Try another one, or you can call us: "
+                           "+49 345 678912")
     else:
         appointment_form = AppointmentForm()
 

@@ -14,13 +14,14 @@ def home(request):
     # Retrieve all services and dentists from the database
     services = Service.objects.all()
     dentists = Dentist.objects.all()
-    
     # Pass the data to the template
-    return render(request, 'home.html', {'services': services, 'dentists': dentists})
+    return render(
+        request, 'home.html', {'services': services, 'dentists': dentists})
+
 
 def services(request):
     services = Service.objects.all()
-    return render(request, 'services.html', {'services': services,})
+    return render(request, 'services.html', {'services': services})
 
 
 def contact_view(request):
@@ -48,8 +49,3 @@ def contact_view(request):
     }
 
     return render(request, 'contact.html', context)
-
-
-
-
-   

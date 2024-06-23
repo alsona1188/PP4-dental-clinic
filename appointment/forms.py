@@ -5,6 +5,7 @@ from datetime import date, time, datetime
 from .models import AppointmentRequest
 from clinic.models import Dentist, Service
 
+
 class TimeSelectField(forms.TypedChoiceField):
     def __init__(self, *args, **kwargs):
         self.date = kwargs.pop('date', None)
@@ -14,13 +15,18 @@ class TimeSelectField(forms.TypedChoiceField):
 
     def get_time_choices(self):
         working_hours = [
-            (time(9, 0), '9:00 AM'), (time(10, 0), '10:00 AM'), (time(11, 0), '11:00 AM'), (time(12, 0), '12:00 PM'),
-            (time(14, 0), '2:00 PM'), (time(15, 0), '3:00 PM'), (time(16, 0), '4:00 PM'), (time(17, 0), '5:00 PM')
+            (time(9, 0), '9:00 AM'), (time(10, 0), '10:00 AM'),
+            (time(11, 0), '11:00 AM'), (time(12, 0), '12:00 PM'),
+            (time(14, 0), '2:00 PM'), (time(15, 0), '3:00 PM'),
+            (time(16, 0), '4:00 PM'), (time(17, 0), '5:00 PM')
         ]
 
         if self.date and self.dentist:
-            booked_times = AppointmentRequest.objects.filter(dentist=self.dentist, date=self.date).values_list('time', flat=True)
-            working_hours = [slot for slot in working_hours if slot[0] not in booked_times]
+            booked_times = AppointmentRequest.objects.filter(
+                dentist=self.dentist, date=self.date).values_list(
+                    'time', flat=True)
+            working_hours = [slot for slot in working_hours
+                             if slot[0] not in booked_times]
 
         return working_hours
 
@@ -30,6 +36,7 @@ class TimeSelectField(forms.TypedChoiceField):
             if value == k or text_value == str(k):
                 return True
         return False
+
 
 class AppointmentForm(forms.ModelForm):
     time = TimeSelectField(label='Time')
@@ -51,7 +58,8 @@ class AppointmentForm(forms.ModelForm):
     def clean_date(self):
         date = self.cleaned_data.get('date')
         if date and date.weekday() in (5, 6):  # 5 = Saturday, 6 = Sunday
-            raise ValidationError("Appointments cannot be booked on weekends. Please choose a weekday.")
+            raise ValidationError(
+                "Appointments cannot be booked on weekends.")
         return date
 
     def clean(self):
@@ -61,7 +69,9 @@ class AppointmentForm(forms.ModelForm):
         time = cleaned_data.get('time')
 
         if dentist and date and time:
-            if AppointmentRequest.objects.filter(dentist=dentist, date=date, time=time).exists():
-                raise ValidationError("This time slot is already booked for the selected dentist.")
+            if AppointmentRequest.objects.filter(
+                 dentist=dentist, date=date, time=time).exists():
+                raise ValidationError(
+                    "This time slot is already booked")
 
         return cleaned_data
