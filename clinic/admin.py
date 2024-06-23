@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django import forms
 from .models import Service, Dentist, ContactFormRequest
 from django_summernote.admin import SummernoteModelAdmin
 
@@ -26,5 +25,3 @@ class ContactFormRequest(SummernoteModelAdmin):
     list_display = ['name', 'email', 'subject', 'message', 'read']
     search_fields = ['name', 'subject']
     list_filter = ('name',)
-
-
