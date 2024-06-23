@@ -1,14 +1,24 @@
 from django.contrib import admin
+from django import forms
 from .models import Service, Dentist, ContactFormRequest
 from django_summernote.admin import SummernoteModelAdmin
 
 
+class ServiceAdminForm(forms.ModelForm):
+    class Meta:
+        model = Service
+        fields = '__all__'
+        widgets = {
+            'description': forms.Textarea(attrs={'rows': 10, 'cols': 80}),
+        }
+
+
 @admin.register(Service)
-class ServiceAdmin(SummernoteModelAdmin):
+class ServiceAdmin(admin.ModelAdmin):
+    form = ServiceAdminForm
     list_display = ['name', 'price']
     search_fields = ['name', 'price']
-    ordering = ['price'] 
-    summernote_fields = ('description',)
+    ordering = ['price']
     list_filter = ('price',)
 
 
