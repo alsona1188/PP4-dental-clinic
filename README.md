@@ -198,7 +198,7 @@ All design features have been manually tested and everything functions as expect
 
 The steps and results are as follows.
 
-#### <div id="testing_us">Testing User Stories </div>
+### <div id="testing_us">Testing User Stories </div>
 
 | User story        | User story testing |           
 | ------------------ | ------------- | 
@@ -216,3 +216,235 @@ The steps and results are as follows.
 | As an admin I can have a CRUD access to database data so that I can make necessary changes. | The admin (superuser) has access to the database appearing in the Django administration page. He has also all the access to create, edit or delete for example a service or add a new dentist. |
 | As an admin I can view the appointments so that I can manage the doctor's timetable. | The Admin has access to booking's data and can click on the appointment request and marked it as "read". |
 | As an admin user I can update the about page so that it is updated and available for the users. | The Admin has access to the about page, can change the content of it.  |
+
+### <div id="testing_features">Testing Features</div>
+#### Navigation links
+
+| Test |  Result |          
+| ------------------ | ------------- |
+| Non logged in user can access the links of landing page in the navbar.  | Non logged in user can access Home, Services, Contact, Register and Log in. All navigation links on home page are working and redirect the user to the correct page. Active page link is highlighted in each case. 
+| Non logged in user can access to sign up and login pages. | User can click the `Login` on the right side of the navbar and is redirected to the login page. For signing in, the user has to enter the username and the password. The user can register also by clicking on Register navbar link, all he need is to create a username, email and password.|
+| Logged in user can have access to my appointments page, make an appointment and log out. | Logged in user can view `My appointments`, "Make appointment" and `Logout` navbar links. The user has also access the button "Appointment" |
+| Logged in user can view the bookings.| List of bookings is available on user's "my appointments" page. If the user already has appointments assigned, he can view current bookings. If the user does not have a reservation yet, He can be able to book one. |
+| Logged in user can log out of their profile.| User can click `Logout` button on the navigation bar and  log out of their profile. |
+
+#### User Forms
+
+| Test |  Result |          
+| ------------------ | ------------- |
+| User can create account. | User is redirected to the registration page by clicking `Register` on the navbar link. Also user can access registration page from `sign up button` at the hero section of the page. They are asked to register if they don't already have an account. The registration form has error handling built in so the user must make the correct inputs. If inputs are incorrect the user is shown a message about incorrect data entry. If registration is successful, a message `Your account is created successfully` is displayed to the user. |
+| User can log in. | User is redirected to the login page by clicking `Login` navbar link. They are asked to log in if they have an account. After authorization the message `Successfully signed in as X user.` is displayed. |
+| Logged in user can make a booking. | Logged in user can access booking page by clicking  `Make an appointment` navbar link. Then user is redirected to the booking page. On the booking page, the user can fill out a form by selecting services from the list, doctor, also choose the date and time of the appointment, and then click `Book Appointment` button. User can make a booking only after the values ​​in all dropdown lists have been selected. The user cannot book an appointment that is not available and also can't book on the weekends.|
+| Autoreset booking form fields. | On changing the selected value of `Services` field, the values ​​of `Dentist` and `Dates and times` fields are automatically reset. On changing the selected value of `Dentist` field, the value ​​of `Dates and times` field is automatically reset. |
+| Logged in user can update the bookings.| Each scheduled booking in the bookings list has an `Edit` button. On clicking `Edit` the user is redirected to update page. Full details of the current booking are displayed on the `edit` page and the user is prompted to change the booking by filling out the booking form below. User can update a booking when all fields complete. Updated booking data and the message `Appointment updated successfully` is displayed to the user on "my apointments" page. |  
+| Logged in user can delete the bookings.| Each scheduled booking in the bookings list has a `delete` button. On clicking `delete` the user is redirected to delete page. Full details of the current booking are displayed on the `delete` page. User can delete the booking by clicking "confirm delete" button, the message `Your appointment was deleted successfully.` is displayed to the user on "my appointments" page. |
+
+
+####  Security Tests
+
+| Test |  Result |          
+| ------------------ | ------------- |
+|Non logged in user cannot make a booking. | The booking page is available only to authorized users. If not logged in user, they will see only the sign up button at the carusel or register link at the navbar. |
+|Non logged in user cannot access "my appointments" page. | The link to the profile page is visible only to authorized users.|
+|User cannot delete a booking without confirmation. | Each scheduled booking in the bookings list has a `delete` button. On clicking `delete` the user is redirected to `delete` page and is asked to confirm that they want to cancel the appointment. Сlicking `confirm delete` deletes the booking. The "my appointments" page displays updated booking details and the message Your appointment was deleted successfully`.
+| Non superuser cannot access admin panel. | The admin panel is accessible only to the user with a superuser login and password. |
+
+#### Admin Tests
+
+| Test |  Result |          
+| ------------------ | ------------- |
+|Admin can view data in database tables. | Admin (superuser) is redirected from the login page to the admin panel. Admin can view all data from database tables including ManyToManyField data. To display ManyToManyField data in `list_display` field.|
+|Admin can add items to the following tables: Services, Dentists, Contact form requests, Appointment requests, Abouts and Users| Admin can access to all database tables and can add items to them.  |
+|Admin can edit items in database. | Admin can access all fields in the database tables and make any changes. |
+|Admin can search and filter data in database tables.  | Admin can search and filter data in database tables using custom fields specified in the corresponding classes. |
+|Admin can delete items in database. | Admin can access all fields in the database tables and can delete a model instance. Any objects which had foreign keys pointing at the object to be deleted will be deleted along with it.
+
+#### Booking Tests
+
+| Test |  Result |          
+| ------------------ | ------------- |
+|The list of dentists is loaded correctly depending on the selected service. | Each dentist provides specific services. When a specific service is selected, only those barbers who provide this service are loaded into the dropdown list of barbers. |
+|Dates and times are loaded correctly depending on the selected dentist. | Each dentist has their own availability regarding to a certain time. When a dentist is selected, will show the date and time from 9:00 to 17:00 with time slots that have 1 hour intervals. The user cannot book on weekends. | 
+
+#### <div id="automated_testing">Automated Testing</div>
+
+Some functions are used on the automated Testing at the tests_myappointments.py to test the create, edit, delete and list appointments.
+
+    def create_appointment(self):
+        """ Helper method to create an AppointmentRequest object."""
+        return AppointmentRequest.objects.create(
+            user=self.user,
+            service=self.service,
+            dentist=self.dentist,
+            date=date.today(),
+            time=time(10, 0),
+            message='Test appointment request'
+        )
+
+    def test_appointment_list_view(self):
+        """Checks if the appointment list view
+        is accessible and uses the correct template."""
+        self.client.force_login(self.user)
+        response = self.client.get(reverse('my_appointments:appointment_list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+             response, 'my_appointments/appointment_list.html')
+
+    def test_appointment_edit_view(self):
+        """Ensures the appointment edit view
+        works and uses the correct template."""
+        appointment = self.create_appointment()
+        url = reverse(
+            'my_appointments:appointment_edit', args=[appointment.id])
+        self.client.force_login(self.user)
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response, 'my_appointments/appointment_edit.html')
+
+    def test_delete_appointment_view(self):
+        """ Verifies the appointment delete view
+        is accessible and uses the correct template."""
+        appointment = self.create_appointment()
+        url = reverse(
+             'my_appointments:appointment_delete', args=[appointment.id])
+        self.client.force_login(self.user)
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+             response, 'my_appointments/appointment_delete.html')
+
+    def test_mark_time_slot_available(self):
+        """Tests marking a time slot as available"""
+        test_date = date.today() + timedelta(days=1)
+        test_time = time(14, 30)
+        mark_time_slot_available(self.dentist, test_date, test_time)
+        self.assertTrue(AvailableTimeSlot.objects.filter(
+            dentist=self.dentist, date=test_date, time=test_time).exists())
+
+    def test_mark_time_slot_unavailable(self):
+        """Tests marking a time slot as unavailable."""
+        test_date = date.today() + timedelta(days=2)
+        test_time = time(9, 0)
+
+Also some functions were used in tests_contactform.py to test the contact form. 
+
+    def test_contact_form_submission(self):
+        # Sends a POST request to the contact_view with valid data.
+        data = {
+            'name': 'John Doe',
+            'email': 'johndoe@example.com',
+            'subject': 'Testing contact form',
+            'message': 'This is a test message.'
+        }
+
+        # Submit POST request
+        response = self.client.post(reverse('contact'), data)
+
+        # Check if the form submission was successful
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(ContactFormRequest.objects.count(), 1)
+
+        # Retrieve the created ContactFormRequest object
+        contact_form_request = ContactFormRequest.objects.first()
+
+        # Verify the data saved in the object
+        self.assertEqual(contact_form_request.name, 'John Doe')
+        self.assertEqual(contact_form_request.email, 'johndoe@example.com')
+        self.assertEqual(contact_form_request.subject, 'Testing contact form')
+        self.assertEqual(
+            contact_form_request.message, 'This is a test message.')
+
+    def test_contact_form_invalid_submission(self):
+        """Tests handling of invalid form submissions.
+        Sends a POST request with invalid data"""
+        invalid_data = {
+            'name': '',  # Invalid because name is required
+            'email': 'invalid-email',  # Invalid email format
+            'subject': 'Testing contact form',
+            'message': 'This is a test message.'
+        }
+
+        # Submit POST request with invalid data
+        response = self.client.post(reverse('contact'), invalid_data)
+
+        # Check if the form submission failed and no new object was created
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(ContactFormRequest.objects.count(), 0)
+
+        # Optionally, check for error messages or form errors in the response
+        self.assertFormError(
+            response, 'form', 'email', 'Enter a valid email address.')
+
+At the appointment app the file tests_views.py was created to test a basic function and check the get request when making an appointment. 
+
+class AppointmentRequestViewTests(TestCase):
+
+    def setUp(self):
+        """This method is where you set up any prerequisites for your tests.
+         Here, we create a test user using Django's authentication system."""
+        self.user = User.objects.create_user(
+            username='testuser', password='password123')
+
+    def test_appointment_request_view_get(self):
+        """Tests the GET request to your view.
+        It checks that the view returns a status code of 200 (OK)
+        and uses the correct template."""
+        self.client.force_login(self.user)  # Simulate logged in user
+        response = self.client.get(reverse('appointment'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'appointment/appointment.html')
+
+At the about app the file tests_views.py was created to test the about us page and if it works properly. 
+
+class AboutUsViewTest(TestCase):
+
+    def setUp(self):
+        # Create a sample About object for testing
+        self.about = About.objects.create(
+            title="Test About Us",
+            updated_on=timezone.now() - timedelta(days=1),  # Simulate a date in the past
+            content="This is a test about us content.",
+        )
+
+    def test_about_us_view(self):
+        url = reverse('about')  # Assuming 'about_us' is the name of your URL pattern
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 200)  # Check if the page loads successfully
+        self.assertContains(response, self.about.title)  # Check if the title appears in the rendered HTML
+        self.assertContains(response, self.about.content)  # Check if the content appears in the rendered HTML
+
+    def tearDown(self):
+        # Clean up any resources after each test if needed
+        pass
+
+
+In the end all the test were checked and were all successful. The test was made by running the command `python manage.py test`. 
+
+![](documentation/testpython_myappointment.png)
+
+
+
+#### <div id="responsiveness">Responsiveness Testing</div>
+
+Testing for responsiveness was conducted using Chrome Dev Tools. The website was tested extensively on a range of emulated mobile, tablet and large format screen sizes in both portrait and landscape orientations.
+
+| Device |  Resolution  |   Result  |        
+| ------------------ | ------------- | ------------- |
+| Samsung Galaxy S8+|  360 x 740  |   Pass  |
+| iPhone 6/7/8 |  375 x 667  |   Pass  |
+| iPhone X |  375 x 812  |   Pass  | 
+| iPhone 12 PRO |  390 x 844  |   Pass  |
+| Samsung Galaxy A51/71 |  412 x 914  |   Pass  |
+| iPhone XR |  414 x 896  |   Pass  | 
+| iPad Mini |  768 x 1024  |   Pass  | 
+| iPad Air |  820 x 1180  |   Pass  | 
+| iPad Pro |  1024 x 1366 |   Pass  | 
+| HP Laptop 14s |  1920 x 1080|   Pass  | 
+
+<a href="#up">Back to Top of page</a>
+
+---
+
+### <div id="bugs">Bugs</div>
