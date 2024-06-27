@@ -68,7 +68,7 @@ Issues were used to create User Stories with custom templates for admin and user
   - Epic: Enable unregistered users to view all the key information about the dental clinic. <br/>
 
     - As a site user I can examine the information on the home page about the services provided so that I can decide if i want to use them.
-    - As a site user I can click on the about page so that read all the information. <br/>
+    - As a site user I can click on the about page so that I can read all the information. <br/>
 
   - Epic: Set up service and contact page. <br/>
     - As a site user I can click on the contact page so that I can read all the contact forms.
@@ -78,7 +78,7 @@ offered. <br/>
   - Epic: Epic: Set up admin page for admin to manage the dental clinic. <br/>
     - As an admin I can have a CRUD access to database data so that I can make necessary changes.
     - As an admin I can view the appointments so that I can manage the doctor's timetable.
-    - As an **admin user ** I can update the about page so that it is updated and available for the users. <br/>
+    - As an admin user I can update the about page so that it is updated and available for the users. <br/>
 
 - Uncompleted User Stories: <br/>
 
@@ -197,3 +197,22 @@ All design features have been manually tested and everything functions as expect
 - All forms have been tested to ensure they are validated and can be submitted without errors.
 
 The steps and results are as follows.
+
+#### <div id="testing_us">Testing User Stories </div>
+
+| User story        | User story testing |           
+| ------------------ | ------------- | 
+|  As a site user I can book an appointment so that I can have the service I want. | The logged in user can make an appointment by clicking on "make appointment" and a form will appear where the user can choose the dentist, the service and the time that he wants. | 
+| As a site user I can update my appointment so that I can change the details. | The logged in user can see the appointments that he booked and can change the date, the time, the service or even the dentist that he wants. A confirmation message will appear as well. The user can click the "Edit" button for each of their appointments and is redirected to the `update` page. On the `update` page they can see all the details of the current booking and below the form for making changes. After making the necessary changes, the user can click `Change` button and is redirected to the "my appointments" page, where all changes are reflected. Or the user can click the `Cancel` button to be redirected to the profile page without making any changes. | 
+| As a site user I can view my appointments so that I can keep track of them. | The logged in user can see the appointments that he booked after he clicks on the my appointments. | 
+| As a logged-in user I can to view my profile information so that I can see my appointment history. | A list of all the appointments will appear after the user is logged in and clicks on the my appointments. | 
+| As a site user I can click on the delete button so that cancel my appointment. | The logged in user can see the appointments that he booked and can delete the appointment that he doesn't want anymore. A confirmation message will appear as well. The user can click the `Delete` button for each of their appointments and is redirected to the `delete` page. On the `delete`  page they are asked to confirm the deletion. If they click "Yes" button, the appointment is deleted, and they are redirected to the "my appointments" page. If they click `Cancel` button, they are redirected to the profile page without deleting the appointment. | 
+| As a site user I can create an account so that I can be able to interact with the website. | The user can sign up and create an account so that he can be able to book an appointment. 
+| As a user I can log in so that I can access my profile. | Once logged in, a registered user can view a list of their appointments. If the user does not have an appointment yet, a message will appear that there is no appointment yet. | 
+| As a site user I can examine the information on the home page about the services provided so that I can decide if i want to use them. | AS a user that is not registered yet and enters into the website for the first time, he is still able to get all the necessary information about the services, the dentists and the location. |
+| As a site user I can click on the about page so that I can read all the information. | As a registered or unregistered user, you can still read all the information on the about page. |
+| As a site user I can click on the contact page so that I can read all the contact forms. | As a registered or unregistered user, you can still read all the information on the contact page and also be able to contact the dental clinic through the contact form. |
+| As a site user I can click on the service page so that I can read all the info about the services that are offered. | As a registered or unregistered user, you can still read all the information on the service page and also be able to download the list price of the services. |
+| As an admin I can have a CRUD access to database data so that I can make necessary changes. | The admin (superuser) has access to the database appearing in the Django administration page. He has also all the access to create, edit or delete for example a service or add a new dentist. |
+| As an admin I can view the appointments so that I can manage the doctor's timetable. | The Admin has access to booking's data and can click on the appointment request and marked it as "read". |
+| As an admin user I can update the about page so that it is updated and available for the users. | The Admin has access to the about page, can change the content of it.  |
