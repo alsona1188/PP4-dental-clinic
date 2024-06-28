@@ -73,7 +73,7 @@ class AppointmentForm(forms.ModelForm):
         return date
 
     def clean(self):
-        """hecks for conflicts with existing appointments."""
+        """checks for conflicts with existing appointments."""
         cleaned_data = super().clean()
         dentist = cleaned_data.get('dentist')
         date = cleaned_data.get('date')

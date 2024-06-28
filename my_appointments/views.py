@@ -14,6 +14,7 @@ from appointment.forms import TimeSelectField
 
 @login_required
 def appointment_list(request):
+    """Display a list of appointments for the currently logged-in user"""
     appointments = AppointmentRequest.objects.filter(user=request.user)
     return render(
         request,
@@ -23,6 +24,8 @@ def appointment_list(request):
 
 @login_required
 def appointment_edit(request, pk):
+    """allows authenticated users to edit an appointment
+    identified by its primary key"""
     appointment = get_object_or_404(
          AppointmentRequest, pk=pk, user=request.user)
     if request.method == "POST":
@@ -63,6 +66,10 @@ def appointment_edit(request, pk):
 
 @login_required
 def delete_appointment(request, appointment_id):
+    """allows authenticated users to delete an appointment
+    they have previously created. It ensures that the appointment belongs to
+    the logged-in user and handles marking the appointment's time slot
+    as available before deleting the appointment."""
     appointment = get_object_or_404(
         AppointmentRequest, pk=appointment_id, user=request.user)
     if request.method == 'POST':

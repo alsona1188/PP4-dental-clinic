@@ -5,6 +5,9 @@ from clinic.models import Dentist
 
 
 class AvailableTimeSlot(models.Model):
+    """Represents the availability of time slots for a dentist.
+    Is used to manage and track which time slots are available
+    for booking appointments with a specific dentist on a given date and time"""
     dentist = models.ForeignKey(Dentist, on_delete=models.CASCADE)
     date = models.DateField()
     time = models.TimeField()
