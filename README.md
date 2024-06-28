@@ -665,7 +665,15 @@ The user registered can sign out from his account.
 ![](documentation/sign_out1.png)
 ![](documentation/sign_out_success.png)
 
+## <div id="f_features">Features left to Implement</div>
 
+- Add the user's phone number to the booking form so that the clinic administrator can call and receive confirmation of attendance for the visit.
+- Send the user a confirmation text message or email to let them know their appointment has been successfully booked.
+- Allow the user to delete and edit their account, like password, username. 
+- Add a blog page, where different themas are discussed. 
+
+
+<a href="#up">Back to Top of page</a>
 
 
 
