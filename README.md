@@ -161,7 +161,7 @@ The colours are chosen to convey the dental environment. They are specified on t
 
 > home.html
 
-![](documentation/home_page.png)
+![](documentation/home_page1.png)
 
 > about.html
 
@@ -448,3 +448,224 @@ Testing for responsiveness was conducted using Chrome Dev Tools. The website was
 ---
 
 ### <div id="bugs">Bugs</div>
+
+#### User import bug
+
+- When processing data from appointment list form the following error happened:
+
+![](documentation/bug1.png)
+
+- The error was fixed after setting up the `from django.contrib.auth.models import User` 
+
+#### Assign the current user bug
+
+- When the user books an appointment we want that that appointment to be corresponding to the user that was logged in. Had some difficulties but the error was resolved by
+adding the appointment.user = request.user at the appointment=> views.py
+
+#### Description field bug
+
+- On the service model created there is a filed `description`, in the beginning the field was made with rich text using summernote in Django but, I saw that during the HTML validator many error occurred, corresponding the style of the rich text used on the description field by the admin. The Bug was fixed by removing the rich text option. 
+
+#### Contact form bug
+
+- When creating the contact form model the following error appeared:
+
+![](documentation/bug2.png)
+
+- Apparently I have forgotten to do the migration. The error was fixed after executing the following commands: `python3 manage.py makemigrations` and `python3 manage.py migrate`
+
+### Google Lighthouse Testing
+#### Desktop
+
+Site pages have been tested using Lighthouse to identify performance and accessibility issues and ensure best practices are followed.
+
+> Homepage (home.html)
+
+![](documentation/home_page_lighthouse.png)
+
+> service.html
+
+![](documentation/services_lighthouse.png)
+
+> about.html
+
+![](documentation/about_us_lighthouse.png)
+
+> contact.html
+
+![](documentation/contact_lighthouse.png)
+
+> appointment.html
+
+![](documentation/book_appointment_lighthouse.png)
+
+### HTML W3 Validation
+![](documentation/html_checker.png)
+Result: no errors.
+
+### CSS Validation
+![](documentation/css_validator.png)
+Result: no errors.
+
+### Python Validation
+
+> my_appointments => views.py
+
+Result: no errors.
+
+![](documentation/myappointment_views_py_checker.png)
+
+> appointments => views.py
+
+Result: no errors.
+
+![](documentation/appointment_views_py_checker.png)
+
+> clinic => views.py
+
+Result: no errors.
+
+![](documentation/clinic_view_py_checker.png)
+
+
+### Javascript Validation
+
+JavaScript code passes through [Jslint](jslint.com) with no issues.
+
+![](documentation/javascript_validation.png)
+
+<a href="#up">Back to Top of page</a>
+
+## <div id="features">Existing Features</div>
+
+### Navigation 
+
+The main navigation is located in the header and is present on all pages. The hamburger menu is present on medium and small devices and expands to show the main navigation links.
+The navigation bar contains the site logo, name, landing page navigation links: `Home`, `Login`, `Register`, `About Us`, `Service`, `Contact`. 
+Before the navbar there is also the topbar with opening hours information, email and phone number. 
+
+![](documentation/header1.png)
+
+`Logout`, `My Appointments` and `Make Appointment`  changes dependent on user status.
+A welcome message `Hello, <username>!` appears for the logged in user. 
+
+![](documentation/header2.png)
+
+### Home page
+
+ The landing page sets out all the key information a potential user will need to know, including services and our staff. The page is available to everyone. The first part is the header with 3 photos forming a carousel. Inside the carousel are 2 buttons, `appointment` and `contact us`, or `sign up`, in case not logged in. 
+
+![](documentation/home_page.png)
+
+### Footer
+
+The footer was designed to provide contact information and social links. It also contains popular links section. 
+
+![](documentation/footer.png)
+
+### Registration page
+
+The registration form contains the fields needed to create user account. If not all required fields are filled in or are filled in incorrectly, user will receive an error notification.
+
+![](documentation/register.png)
+
+Once a profile has been created, user will see a message to confirm that the profile has been successfully created.
+
+![](documentation/register_success.png)
+
+### Login page
+
+On the login page, the user enters their username and password.
+![](documentation/signin.png)
+
+Once logged in, the user will be notified that they are logged in, and redirected to the home page. 
+![](documentation/signin_success.png)
+
+### Booking page
+
+If the user is logged in he can make an appointment. 
+
+![](documentation/new_appointment.png)
+
+On the booking page, user can select a service from a dropdown list of services.
+
+![](documentation/services_list.png)
+
+Once a service is selected, a list of dentists appears.
+
+![](documentation/dentists.png)
+
+After selecting a dentists, a list of available dates and times for that dentist appears.
+
+![](documentation/date.png)
+![](documentation/time.png)
+
+The `Book Appointment` button becomes active only after all values ​​in dropdown lists have been selected. The user cannot book appointments on Weekends or when the time and the dentist is already booked for that day. 
+
+![](documentation/booking_success.png)
+![](documentation/error1.png)
+![](documentation/error2.png)
+
+
+### My appointments page
+
+The user can view all details of their bookings including service name, dentist's name and date and time of appointment. From this view they have access to every scheduled booking which can be updated (`edit` button) or deleted (`delete` button). The page shows all bookings that have not been deleted.
+
+![](documentation/my_appointments.png)
+
+### Edit page
+
+If the user selects to edit a booking they are taken to a form prepopulated with the information about that appointment so it can be edited.
+
+![](documentation/update_booking.png)
+
+After changing a booking, the user will see a message indicating that the appointment has been changed and will be redirected to the my appointments page to view the updated information.
+
+![](documentation/edit.png)
+![](documentation/edit_success.png)
+
+### Delete page
+
+If the user decides to delete a booking, they are taken to a deletion confirmation page.
+
+![](documentation/delete.png)
+
+Once an appointment is deleted, the user will see a message:
+
+![](documentation/delete_success.png)
+
+If the user does not have appointments, they will see a corresponding text.
+
+![](documentation/no_appointments.png)
+
+### About us page
+
+The user registered or not registered can see the about us page. 
+
+![](documentation/about.png)
+
+### Services page
+
+The user registered or not registered can see the services page and download a price list
+
+![](documentation/services.png)
+
+### Contact page
+
+The user registered or not registered can see the contact page and also a contact form to directly ask or contact the clinic.
+
+![](documentation/contact1.png)
+![](documentation/contact_form.png)
+![](documentation/contact_success.png)
+
+### Sign out page
+
+The user registered can sign out from his account. 
+
+![](documentation/sign_out1.png)
+![](documentation/sign_out_success.png)
+
+
+
+
+
