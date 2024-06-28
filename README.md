@@ -681,6 +681,8 @@ The user registered can sign out from his account.
 - **HTML/CSS** + **Django Template Language** used to structure webpages 
 - **Javascript** used to create the function that disables the weekends, If the selected date is a weekend, it shows an alert message to the user, informing them that weekends are not allowed.
 - **Django** framework used to build this project. Provides a ready installed admin panel and includes many helper template tags that make writing code quick and efficient.
+- **Github** used for version control and deployment of the website.
+- **Gitpod** as cloud-based development environment.
 - **Bootstrap** used as the base front end framework to work alongside Django.
 - **Cloudinary** used to host the static files for this project.
 - **Heroku** used for hosting the project.
