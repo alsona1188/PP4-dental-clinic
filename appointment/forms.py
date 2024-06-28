@@ -7,6 +7,8 @@ from clinic.models import Dentist, Service
 
 
 class TimeSelectField(forms.TypedChoiceField):
+    """Takes additional parameters date and dentist
+     to determine available time slots."""
     def __init__(self, *args, **kwargs):
         self.date = kwargs.pop('date', None)
         self.dentist = kwargs.pop('dentist', None)
@@ -14,6 +16,8 @@ class TimeSelectField(forms.TypedChoiceField):
         self.choices = self.get_time_choices()
 
     def get_time_choices(self):
+        """Filters out times that have already been booked
+         for the given date and dentist."""
         working_hours = [
             (time(9, 0), '9:00 AM'), (time(10, 0), '10:00 AM'),
             (time(11, 0), '11:00 AM'), (time(12, 0), '12:00 PM'),
@@ -31,6 +35,8 @@ class TimeSelectField(forms.TypedChoiceField):
         return working_hours
 
     def valid_value(self, value):
+        """valid_value method ensures
+        that the selected value is valid."""
         text_value = str(value)
         for k, v in self.choices:
             if value == k or text_value == str(k):
@@ -42,6 +48,8 @@ class AppointmentForm(forms.ModelForm):
     time = TimeSelectField(label='Time')
 
     class Meta:
+        """Specifies AppointmentRequest as the model
+         and lists the fields to include."""
         model = AppointmentRequest
         fields = ('service', 'dentist', 'date', 'time', 'message')
         widgets = {
@@ -49,6 +57,7 @@ class AppointmentForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        """initializes the time field based on provided date and dentist."""
         super().__init__(*args, **kwargs)
         if 'date' in self.data and 'dentist' in self.data:
             date = self.data.get('date')
@@ -56,6 +65,7 @@ class AppointmentForm(forms.ModelForm):
             self.fields['time'] = TimeSelectField(date=date, dentist=dentist)
 
     def clean_date(self):
+        """validates that appointments cannot be booked on weekends."""
         date = self.cleaned_data.get('date')
         if date and date.weekday() in (5, 6):  # 5 = Saturday, 6 = Sunday
             raise ValidationError(
@@ -63,6 +73,7 @@ class AppointmentForm(forms.ModelForm):
         return date
 
     def clean(self):
+        """hecks for conflicts with existing appointments."""
         cleaned_data = super().clean()
         dentist = cleaned_data.get('dentist')
         date = cleaned_data.get('date')

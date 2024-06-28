@@ -10,6 +10,10 @@ from django.contrib import messages
 
 @login_required
 def appointment_request(request):
+    """Ensures the user is logged in.
+    Handles form submission via a POST request:
+    Handles GET requests by rendering an empty appointment form.
+    Renders the appropriate template."""
     if request.method == "POST":
         appointment_form = AppointmentForm(data=request.POST)
         if appointment_form.is_valid():
